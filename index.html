@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para alguien muy especial</title>
+    <style>
+        body {
+            background-color: #fdf6f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; overflow: hidden; color: #5c4033;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .album-container {
+            width: 100%; max-width: 420px; height: 100%; max-height: 750px;
+            background: #ffffff; position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+            box-shadow: 0 10px 30px rgba(212, 165, 165, 0.2);
+        }
+        .page {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #fffbf7 0%, #ffece3 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 40px; box-sizing: border-box; text-align: center;
+            opacity: 0; transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            transform: scale(0.96); pointer-events: none;
+        }
+        .page.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+        h1 { font-size: 24px; color: #d47a6a; margin-bottom: 15px; }
+        p { font-size: 17px; line-height: 1.6; color: #6b4f4f; margin: 15px 0; }
+        .btn {
+            background-color: #d47a6a; color: white; border: none;
+            padding: 12px 25px; border-radius: 25px; font-size: 16px;
+            cursor: pointer; margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(212, 122, 106, 0.4);
+        }
+        .nav-hint { position: absolute; bottom: 25px; font-size: 12px; color: #b5938c; }
+        .gold-text { color: #c5a059; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="album-container" id="album">
+        <div class="page active" onclick="nextPage()">
+            <div style="font-size: 45px; margin-bottom: 15px;">💝</div>
+            <h1>Un pequeño detalle para ti</h1>
+            <p>Toca la pantalla para abrir este rinconcito hecho con mucho cariño.</p>
+            <button class="btn">Abrir álbum</button>
+            <div class="nav-hint">Toca los lados para pasar página</div>
+        </div>
+        <div class="page" onclick="handlePageClick(event)">
+            <div style="font-size: 38px; margin-bottom: 15px;">🌹</div>
+            <p>"Que la distancia no te haga olvidar que te quiero y que mi silencio no te haga pensar que me olvidé de ti."</p>
+            <div class="nav-hint">← Toca para retroceder / avanzar →</div>
+        </div>
+        <div class="page" onclick="handlePageClick(event)">
+            <div style="font-size: 38px; margin-bottom: 15px;">💌</div>
+            <p>"Si hago cosas por ti, no es para que me quieras, es para que sepas que te quiero."</p>
+            <div class="nav-hint">← Toca para retroceder / avanzar →</div>
+        </div>
+        <div class="page" onclick="handlePageClick(event)">
+            <div style="font-size: 38px; margin-bottom: 15px;">✨</div>
+            <p>"¿Cómo no amarte si en tu risa cabe el mundo y en tu abrazo el tiempo se detiene?"</p>
+            <div class="nav-hint">← Toca para retroceder / avanzar →</div>
+        </div>
+        <div class="page" onclick="handlePageClick(event)">
+            <div style="font-size: 38px; margin-bottom: 15px;">🧅💚</div>
+            <p>"Como dijo Shrek: yo sí te quiero deveritas deveritas."</p>
+            <div class="nav-hint">← Toca para retroceder / avanzar →</div>
+        </div>
+        <div class="page" onclick="handlePageClick(event)">
+            <div style="font-size: 38px; margin-bottom: 15px;">👓💛</div>
+            <p>Mi miopía solo te enfoca a ti...<br><span class="gold-text">Eres lo único que resalta en mi mundo.</span></p>
+            <div class="nav-hint">← Toca para retroceder / avanzar →</div>
+        </div>
+        <div class="page" onclick="goToPage(0)">
+            <div style="font-size: 45px; margin-bottom: 15px;">💖</div>
+            <h1>Fin del álbum</h1>
+            <p>Gracias por existir y ser tan especial.</p>
+            <button class="btn" onclick="goToPage(0)">Volver al inicio ↺</button>
+        </div>
+    </div>
+    <script>
+        let currentPage = 0;
+        const pages = document.querySelectorAll('.page');
+        function showPage(index) {
+            pages.forEach((page, i) => { page.classList.toggle('active', i === index); });
+            currentPage = index;
+        }
+        function nextPage() { if (currentPage < pages.length - 1) showPage(currentPage + 1); else showPage(0); }
+        function prevPage() { if (currentPage > 0) showPage(currentPage - 1); }
+        function goToPage(index) { showPage(index); }
+        function handlePageClick(event) {
+            if (event.clientX < window.innerWidth / 2) prevPage(); else nextPage();
+        }
+    </script>
+</body>
+</html>
